@@ -172,8 +172,8 @@ function otherCursor(temp_x, temp_y, temp_w, temp_h, temp_id) {
   temp_x = map(temp_x, 0, temp_w, 0, width);
   temp_y = map(temp_y, 0, temp_h, 0, height);
 
-  this.x = temp_x - width / 2;
-  this.y = temp_y - height / 2;
+  this.x = temp_x// - width / 2;
+  this.y = temp_y// - height / 2;
   this.id = temp_id;
   this.color = palette[round(random(palette.length-1))];
   this.size = 50;
