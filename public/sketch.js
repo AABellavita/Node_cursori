@@ -109,6 +109,10 @@ function mousePos(data) {
   console.log(data.width + "/" + data.height);
   data.x = map(data.x, 0, data.width, 0, width, true);
   data.y = map(data.y, 0, data.height, 0, height, true);
+
+  data.x = data.x - width / 2;
+  data.y = data.y - height / 2;
+  
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
   // If no cursor with that ID is find ---> "getPos" is set to undefined
@@ -170,8 +174,8 @@ class myCursor {
 // }
 
 function otherCursor(temp_x, temp_y, temp_w, temp_h, temp_id) {
-  this.x = temp_x - width;
-  this.y = temp_y - height;
+  this.x = temp_x;
+  this.y = temp_y;
   this.id = temp_id;
   this.color = palette[round(random(palette.length-1))];
   this.size = 50;
