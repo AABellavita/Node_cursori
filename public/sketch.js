@@ -43,11 +43,6 @@ function draw() {
   };
   socket.emit("mouse", mousePosition);
 
-  for(var i = 0; i < otherCursors.length; i++){
-    otherCursors[i].display();
-    otherCursors[i].update();
-  }
-
   translate(width / 2, height / 2);
   angleMode(DEGREES);
   background(0);
@@ -58,14 +53,20 @@ function draw() {
   pointer.position.x = mouseX - width / 2;
   pointer.position.y = mouseY - height / 2;
 
+  myCursor.update();
+  myCursor.display();
+
+  for(var i = 0; i < otherCursors.length; i++){
+    //rotate(360 / otherCursors.length); //???
+    otherCursors[i].display();
+    otherCursors[i].update();
+  }
+
   if (mouseIsPressed) {
     for (var i = 0; i < random(0, 80); i++) {
       particles0.push(new particelle(255, 255, 255));
     }
   }
-
-  myCursor.update();
-  myCursor.display();
 
   for (var i = 0; i < particles0.length; i++) {
     particles0[i].update();
