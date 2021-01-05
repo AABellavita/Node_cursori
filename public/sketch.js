@@ -1,12 +1,14 @@
 // __ Global Variables __
 
 let socket = io();
-//var myCursor;
-var otherCursors = [];
 
+//var myCursor;
 var myParticles = [];
+
+var otherCursors = [];
 var otherParticles = [];
-var playerParticles = [];
+
+var playersParticles = [];
 
 var clickEffect = [];
 var palette = [
