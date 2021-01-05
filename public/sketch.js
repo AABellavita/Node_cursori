@@ -51,7 +51,7 @@ function draw() {
     otherCursors[i].update();
     pop();
   }
-  
+
   translate(width / 2, height / 2);
   angleMode(DEGREES);
   noCursor();
@@ -107,18 +107,20 @@ function mousePos(data) {
   // Find the cursor that has the same ID of the data received
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
-  // data.x = map(data.x, 0, data.win_w, 0, width, true);
-  // data.y = map(data.y, 0, data.win_h, 0, height, true);
   console.log(data.x + "/" + data.y);
 
   // If no cursor with that ID is find ---> "getPos" is set to undefined
   // so create a new cursor with that ID
   if (getPos == undefined) {
+    data.x = map(data.x, 0, data.win_w, 0, width, true);
+    data.y = map(data.y, 0, data.win_h, 0, height, true);
     var tempCursor = new otherCursor(data.x, data.y, data.win_w, data.win_h, data.id); // Create new cursor
     otherCursors.push(tempCursor); // Push it on the "cursors" array
   }
   // If there is a cursor with that ID update the position
   else {
+    data.x = map(data.x, 0, data.win_w, 0, width, true);
+    data.y = map(data.y, 0, data.win_h, 0, height, true);
     getPos.x = data.x;
     getPos.y = data.y;
   }
