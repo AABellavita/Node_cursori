@@ -113,7 +113,7 @@ function mousePos(data) {
   // If no cursor with that ID is find ---> "getPos" is set to undefined
   // so create a new cursor with that ID
   if (getPos == undefined) {
-    var tempCursor = new otherCursor(data.x, data.y, data.id); // Create new cursor
+    var tempCursor = new otherCursor(data.x, data.y, data.win_w, data.win_h, data.id); // Create new cursor
     otherCursors.push(tempCursor); // Push it on the "cursors" array
   }
   // If there is a cursor with that ID update the position
@@ -168,7 +168,10 @@ class myCursor {
 //   pop();
 // }
 
-function otherCursor(temp_x, temp_y, temp_id) {
+function otherCursor(temp_x, temp_y, temp_w, temp_h, temp_id) {
+  temp_x = map(temp_x, 0, temp_w, 0, width);
+  temp_y = map(temp_y, 0, temp_h, 0, height);
+
   this.x = temp_x - width / 2;
   this.y = temp_y - height / 2;
   this.id = temp_id;
