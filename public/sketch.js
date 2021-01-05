@@ -104,9 +104,9 @@ socket.on('deleteCursor', function(data) {
 
 function mousePos(data) {
   // Find the cursor that has the same ID of the data received
+  console.log(data.win_w + "/" + data.win_h);
   data.x = map(data.x, 0, data.win_w, 0, width, true);
   data.y = map(data.y, 0, data.win_h, 0, height, true);
-  console.log(data.x + "/" + data.y);
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
   // If no cursor with that ID is find ---> "getPos" is set to undefined
