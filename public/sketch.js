@@ -108,19 +108,17 @@ function mousePos(data) {
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
   console.log(data.x + "/" + data.y);
+  data.x = map(data.x, 0, data.win_w, 0, width, true);
+  data.y = map(data.y, 0, data.win_h, 0, height, true);
 
   // If no cursor with that ID is find ---> "getPos" is set to undefined
   // so create a new cursor with that ID
   if (getPos == undefined) {
-    data.x = map(data.x, 0, data.win_w, 0, width, true);
-    data.y = map(data.y, 0, data.win_h, 0, height, true);
     var tempCursor = new otherCursor(data.x, data.y, data.win_w, data.win_h, data.id); // Create new cursor
     otherCursors.push(tempCursor); // Push it on the "cursors" array
   }
   // If there is a cursor with that ID update the position
   else {
-    data.x = map(data.x, 0, data.win_w, 0, width, true);
-    data.y = map(data.y, 0, data.win_h, 0, height, true);
     getPos.x = data.x;
     getPos.y = data.y;
   }
@@ -172,11 +170,11 @@ class myCursor {
 // }
 
 function otherCursor(temp_x, temp_y, temp_w, temp_h, temp_id) {
-  //temp_x = map(temp_x, 0, temp_w, 0, width);
-  //temp_y = map(temp_y, 0, temp_h, 0, height);
+  this.x = map(temp_x, 0, temp_w, 0, width);
+  this.y = map(temp_y, 0, temp_h, 0, height);
 
-  this.x = temp_x// - width / 2;
-  this.y = temp_y// - height / 2;
+  // this.x = temp_x// - width / 2;
+  // this.y = temp_y// - height / 2;
   this.id = temp_id;
   this.color = palette[round(random(palette.length-1))];
   this.size = 50;
