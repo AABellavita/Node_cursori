@@ -60,7 +60,7 @@ function draw() {
     push();
     //rotate(360 / otherCursors.length); //???
     otherCursors[i].display();
-    otherCursors[i].update();
+    //otherCursors[i].update();
     pop();
   }
 
@@ -161,9 +161,10 @@ function otherCursor(temp_x, temp_y, temp_id){
     this.y = temp_y - height / 2;
 
     this.color = palette[round(random(palette.length-1))];
-    fill(this.color.r, this.color.g, this.color.b, 50);
-
-    ellipse(this.x, this.y, 100);
+    this.display = function() {
+      fill(this.color.r, this.color.g, this.color.b, 50);
+      ellipse(this.x, this.y, 100);
+    }
   pop();
 }
 
