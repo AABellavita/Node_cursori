@@ -38,8 +38,8 @@ function draw() {
   let mousePosition = {
     x: mouseX,
     y: mouseY,
-    win_w: width,
-    win_h: height
+    width: width,
+    height: height
   };
   socket.emit("mouse", mousePosition);
 
@@ -104,15 +104,15 @@ socket.on('deleteCursor', function(data) {
 
 function mousePos(data) {
   // Find the cursor that has the same ID of the data received
-  console.log(data.win_w + "/" + data.win_h);
-  data.x = map(data.x, 0, data.win_w, 0, width, true);
-  data.y = map(data.y, 0, data.win_h, 0, height, true);
+  console.log(data.width + "/" + data.height);
+  data.x = map(data.x, 0, data.width, 0, width, true);
+  data.y = map(data.y, 0, data.height, 0, height, true);
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
   // If no cursor with that ID is find ---> "getPos" is set to undefined
   // so create a new cursor with that ID
   if (getPos == undefined) {
-    var tempCursor = new otherCursor(data.x, data.y, data.win_w, data.win_h, data.id); // Create new cursor
+    var tempCursor = new otherCursor(data.x, data.y, data.width, data.height, data.id); // Create new cursor
     otherCursors.push(tempCursor); // Push it on the "cursors" array
   }
   // If there is a cursor with that ID update the position

@@ -34,8 +34,8 @@ function newConnection(socket) {
     var mouseData = {
       x: data.x,
       y: data.y,
-      win_w: data.width,
-      win_h: data.height,
+      width: data.width,
+      height: data.height,
       id: socket.id,
     }
     socket.broadcast.emit("mouseBroadcast", mouseData);
