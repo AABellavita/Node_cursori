@@ -30,7 +30,7 @@ function newConnection(socket) {
   //when a new connection is created, print its id
   console.log("socket: ", socket.id);
 
-  socket.on("mouse", function(data) {
+  socket.on("mouse", function(data)) {
     var mouseData = {
       x: data.x,
       y: data.y,
@@ -42,7 +42,7 @@ function newConnection(socket) {
     console.log(socket.client.id, data);
   });
 
-  socket.on("disconnect", function() {
+  socket.on("disconnect", function()) {
     var socketData = {
       id: socket.id,
     }
