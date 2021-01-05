@@ -34,6 +34,7 @@ function setup() {
 // __ Draw __
 
 function draw() {
+  background("#030c24");
 
   let mousePosition = {
     x: mouseX,
@@ -43,9 +44,16 @@ function draw() {
   };
   socket.emit("mouse", mousePosition);
 
+  for(var i = 0; i < otherCursors.length; i++){
+    push();
+    //rotate(360 / otherCursors.length); //???
+    otherCursors[i].display();
+    otherCursors[i].update();
+    pop();
+  }
+  
   translate(width / 2, height / 2);
   angleMode(DEGREES);
-  background("#030c24");
   noCursor();
 
   drawSprites();
@@ -56,13 +64,6 @@ function draw() {
   myCursor.update();
   myCursor.display();
 
-  for(var i = 0; i < otherCursors.length; i++){
-    push();
-    //rotate(360 / otherCursors.length); //???
-    otherCursors[i].display();
-    otherCursors[i].update();
-    pop();
-  }
 
   if (mouseIsPressed) {
     for (var i = 0; i < random(0, 80); i++) {
