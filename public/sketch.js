@@ -107,8 +107,8 @@ socket.on('deleteCursor', function(data) {
 function mousePos(data) {
   // Find the cursor that has the same ID of the data received
 
-  // data.x = map(data.x, 0, data.width, 0, width, true);
-  // data.y = map(data.y, 0, data.height, 0, height, true);
+  data.x = map(data.x, 0, data.width, 0, width, false);
+  data.y = map(data.y, 0, data.height, 0, height, false);
 
   data.x = data.x - width / 2;
   data.y = data.y - height / 2;
