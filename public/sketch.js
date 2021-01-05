@@ -159,19 +159,6 @@ class myCursor {
   }
 }
 
-// function otherCursor(temp_x, temp_y, temp_w, temp_h, temp_id){
-//   push();
-//
-//     this.x = map(temp_x, 0, temp_w, 0, width);
-//     this.y = map(temp_y, 0, temp_h, 0, height);
-//
-//     this.color = palette[round(random(palette.length-1))];
-//     this.display = function() {
-//       fill(this.color.r, this.color.g, this.color.b, 50);
-//       ellipse(this.x, this.y, 100);
-//     }
-//   pop();
-// }
 
 function otherCursor(temp_x, temp_y, temp_w, temp_h, temp_id) {
   this.x = temp_x;
