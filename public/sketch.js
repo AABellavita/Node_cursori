@@ -106,8 +106,9 @@ function mousePos(data) {
   // Find the cursor that has the same ID of the data received
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
-  data.x = map(data.x, 0, data.win_w, 0, width, true);
-  data.y = map(data.y, 0, data.win_h, 0, height, true);
+  // data.x = map(data.x, 0, data.win_w, 0, width, true);
+  // data.y = map(data.y, 0, data.win_h, 0, height, true);
+  console.log(data.x + "/" + data.y);
 
   // If no cursor with that ID is find ---> "getPos" is set to undefined
   // so create a new cursor with that ID
@@ -153,24 +154,21 @@ class myCursor {
   }
 }
 
-function otherCursor(temp_x, temp_y, temp_id){
+// function otherCursor(temp_x, temp_y, temp_id){
+//   push();
+//
+//     this.x = temp_x - width / 2;
+//     this.y = temp_y - height / 2;
+//
+//     this.color = palette[round(random(palette.length-1))];
+//     this.display = function() {
+//       fill(this.color.r, this.color.g, this.color.b, 50);
+//       ellipse(this.x, this.y, 100);
+//     }
+//   pop();
+// }
 
-  push();
-
-    this.x = temp_x - width / 2;
-    this.y = temp_y - height / 2;
-
-    console.log(this.x + "/" + this.y);
-
-    this.color = palette[round(random(palette.length-1))];
-    this.display = function() {
-      fill(this.color.r, this.color.g, this.color.b, 50);
-      ellipse(this.x, this.y, 100);
-    }
-  pop();
-}
-
-/*function otherCursor(temp_x, temp_y, temp_id) {
+function otherCursor(temp_x, temp_y, temp_id) {
   this.x = temp_x - width / 2;
   this.y = temp_y - height / 2;
   this.id = temp_id;
@@ -197,7 +195,7 @@ function otherCursor(temp_x, temp_y, temp_id){
       ellipse(this.history[i].x, this.history[i].y, i / 1.5);
     }
   }
-}*/
+}
 
 
 class particelle {
