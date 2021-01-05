@@ -39,7 +39,6 @@ function newConnection(socket) {
       id: socket.id,
     }
     socket.broadcast.emit("mouseBroadcast", mouseData);
-    console.log(socket.client.id, data);
   });
 
   socket.on("disconnect", function() {
@@ -48,6 +47,17 @@ function newConnection(socket) {
     }
     socket.broadcast.emit("deleteCursor", socketData);
   });
+
+  // socket.on("particles", function(data) {
+  //   var particlesData = {
+  //     x: data.x,
+  //     y: data.y,
+  //     width: data.width,
+  //     height: data.height,
+  //     id: socket.id
+  //   }
+  //   socket.broadcast.emit("particlesBroadcast", particlesData);
+  // });
 }
 
 console.log("node server is running");
