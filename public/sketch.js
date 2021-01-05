@@ -60,7 +60,7 @@ function draw() {
     push();
     //rotate(360 / otherCursors.length); //???
     otherCursors[i].display();
-    //otherCursors[i].update();
+    otherCursors[i].update();
     pop();
   }
 
@@ -154,48 +154,48 @@ class myCursor {
   }
 }
 
-function otherCursor(temp_x, temp_y, temp_id){
-  push();
-
-    this.x = temp_x - width / 2;
-    this.y = temp_y - height / 2;
-
-    this.color = palette[round(random(palette.length-1))];
-    this.display = function() {
-      fill(this.color.r, this.color.g, this.color.b, 50);
-      ellipse(this.x, this.y, 100);
-    }
-  pop();
-}
-
-// function otherCursor(temp_x, temp_y, temp_id) {
-//   this.x = temp_x - width / 2;
-//   this.y = temp_y - height / 2;
-//   this.id = temp_id;
-//   this.color = palette[round(random(palette.length-1))];
-//   this.size = 50;
-//   this.history = [];
+// function otherCursor(temp_x, temp_y, temp_id){
+//   push();
 //
-//   this.update = function() {
-//     var prevPos = {
-//       x: this.x,
-//       y: this.y
-//     }
-//     this.history.push(prevPos);
+//     this.x = temp_x - width / 2;
+//     this.y = temp_y - height / 2;
 //
-//     if (this.history.length > 40) {
-//       this.history.splice(0, 1);
+//     this.color = palette[round(random(palette.length-1))];
+//     this.display = function() {
+//       fill(this.color.r, this.color.g, this.color.b, 50);
+//       ellipse(this.x, this.y, 100);
 //     }
-//   }
-//
-//   this.display = function() {
-//     noStroke();
-//     fill(this.color.r, this.color.g, this.color.b, 50);
-//     for (var i = 0; i < this.history.length; i++) {
-//       ellipse(this.history[i].x, this.history[i].y, i / 1.5);
-//     }
-//   }
+//   pop();
 // }
+
+function otherCursor(temp_x, temp_y, temp_id) {
+  this.x = temp_x - width / 2;
+  this.y = temp_y - height / 2;
+  this.id = temp_id;
+  this.color = palette[round(random(palette.length-1))];
+  this.size = 50;
+  this.history = [];
+
+  this.update = function() {
+    var prevPos = {
+      x: this.x,
+      y: this.y
+    }
+    this.history.push(prevPos);
+
+    if (this.history.length > 40) {
+      this.history.splice(0, 1);
+    }
+  }
+
+  this.display = function() {
+    noStroke();
+    fill(this.color.r, this.color.g, this.color.b, 50);
+    for (var i = 0; i < this.history.length; i++) {
+      ellipse(this.history[i].x, this.history[i].y, i / 1.5);
+    }
+  }
+}
 
 
 class particelle {
