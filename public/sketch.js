@@ -31,7 +31,7 @@ function setup() {
   pointer.addImage(loadImage('assets/images/pointer.png'));
 
   socket.on("mouseBroadcast", mousePos);
-  socket.on("particlesBroadcast", particlesPos);
+  //socket.on("particlesBroadcast", particlesPos);
 }
 
 
@@ -70,13 +70,13 @@ function draw() {
   }
 
   if (mouseIsPressed) {
-    let mouseParticles = {
-      x: mouseX,
-      y: mouseY,
-      width: width,
-      height: height
-    };
-    socket.emit("particles", mouseParticles);
+    // let mouseParticles = {
+    //   x: mouseX,
+    //   y: mouseY,
+    //   width: width,
+    //   height: height
+    // };
+    // socket.emit("particles", mouseParticles);
 
     for (var i = 0; i < random(0, 80); i++) {
       myParticles.push(new myParticle());
