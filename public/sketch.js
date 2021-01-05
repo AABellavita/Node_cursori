@@ -48,7 +48,7 @@ function draw() {
   for(var i = 0; i < otherCursors.length; i++){
     push();
     // console.log(360 / (otherCursors.length+1));
-    // rotate(360 / (otherCursors.length+1)); //???
+    rotate(360 / (otherCursors.length+1)); //???
     otherCursors[i].display();
     otherCursors[i].update();
     pop();
@@ -106,13 +106,13 @@ socket.on('deleteCursor', function(data) {
 
 function mousePos(data) {
   // Find the cursor that has the same ID of the data received
-  console.log(data.width + "/" + data.height);
+
   data.x = map(data.x, 0, data.width, 0, width, true);
   data.y = map(data.y, 0, data.height, 0, height, true);
 
   data.x = data.x - width / 2;
   data.y = data.y - height / 2;
-  
+
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
   // If no cursor with that ID is find ---> "getPos" is set to undefined
