@@ -45,7 +45,7 @@ function draw() {
 
   translate(width / 2, height / 2);
   angleMode(DEGREES);
-  background(0);
+  background("#030c24");
   noCursor();
 
   drawSprites();
@@ -57,9 +57,11 @@ function draw() {
   myCursor.display();
 
   for(var i = 0; i < otherCursors.length; i++){
+    push();
     //rotate(360 / otherCursors.length); //???
     otherCursors[i].display();
     otherCursors[i].update();
+    pop();
   }
 
   if (mouseIsPressed) {
