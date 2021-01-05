@@ -47,7 +47,7 @@ function draw() {
     push();
     //rotate(360 / otherCursors.length); //???
     otherCursors[i].display();
-    //otherCursors[i].update();
+    otherCursors[i].update();
     pop();
   }
 
