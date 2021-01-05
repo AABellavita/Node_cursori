@@ -45,7 +45,7 @@ function draw() {
 
   for(var i = 0; i < otherCursors.length; i++){
     push();
-    //rotate(360 / otherCursors.length); //???
+    rotate(360 / otherCursors.length+1); //???
     otherCursors[i].display();
     otherCursors[i].update();
     pop();
@@ -174,7 +174,7 @@ function otherCursor(temp_x, temp_y, temp_w, temp_h, temp_id) {
   // this.x = temp_x// - width / 2;
   // this.y = temp_y// - height / 2;
   this.id = temp_id;
-  this.color = palette[round(random(palette.length-1))];
+  this.color = palette[round(random(palette.length))];
   this.size = 50;
   this.history = [];
 
