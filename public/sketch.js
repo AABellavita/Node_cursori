@@ -43,16 +43,17 @@ function draw() {
   };
   socket.emit("mouse", mousePosition);
 
+
   for(var i = 0; i < otherCursors.length; i++){
     push();
-    console.log(360 / (otherCursors.length+1));
-    rotate(360 / (otherCursors.length+1)); //???
+    // console.log(360 / (otherCursors.length+1));
+    // rotate(360 / (otherCursors.length+1)); //???
     otherCursors[i].display();
     otherCursors[i].update();
     pop();
   }
-
   translate(width / 2, height / 2);
+
   angleMode(DEGREES);
   noCursor();
 
@@ -169,13 +170,10 @@ class myCursor {
 // }
 
 function otherCursor(temp_x, temp_y, temp_w, temp_h, temp_id) {
-  this.x = map(temp_x, 0, temp_w, 0, width);
-  this.y = map(temp_y, 0, temp_h, 0, height);
-
-  // this.x = temp_x// - width / 2;
-  // this.y = temp_y// - height / 2;
+  this.x = temp_x// - width / 2;
+  this.y = temp_y// - height / 2;
   this.id = temp_id;
-  this.color = palette[round(random(palette.length))];
+  this.color = palette[round(random(palette.length-1))];
   this.size = 50;
   this.history = [];
 
