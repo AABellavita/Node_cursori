@@ -153,8 +153,21 @@ class myCursor {
   }
 }
 
+function otherCursor(temp_x, temp_y, temp_id){
 
-function otherCursor(temp_x, temp_y, temp_id) {
+  push();
+
+    this.x = temp_x - width / 2;
+    this.y = temp_y - height / 2;
+
+    this.color = palette[round(random(palette.length-1))];
+    fill(this.color.r, this.color.g, this.color.b, 50);
+
+    ellipse(this.x, this.y, 100);
+  pop();
+}
+
+/*function otherCursor(temp_x, temp_y, temp_id) {
   this.x = temp_x - width / 2;
   this.y = temp_y - height / 2;
   this.id = temp_id;
@@ -181,7 +194,7 @@ function otherCursor(temp_x, temp_y, temp_id) {
       ellipse(this.history[i].x, this.history[i].y, i / 1.5);
     }
   }
-}
+}*/
 
 
 class particelle {
