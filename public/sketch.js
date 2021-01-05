@@ -48,7 +48,7 @@ function draw() {
   for(var i = 0; i < otherCursors.length; i++){
     push();
     // console.log(360 / (otherCursors.length+1));
-    rotate(360 / (otherCursors.length+1)); //???
+    rotate(360 / (otherCursors.length+1)*(i+1)); //???
     otherCursors[i].display();
     otherCursors[i].update();
     pop();
