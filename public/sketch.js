@@ -104,18 +104,18 @@ function draw() {
   }
 
 
-  //for(var i = 0; i < playersParticles.length; i++){
+  for(var i = 0; i < otherCursors.length; i++){
+    push();
+    rotate(360 / (otherCursors.length+1)*(i+1));
     for (var j = 0; j < otherParticles.length; j++) {
-      push();
-      rotate(360 / (otherCursors.length+1)*(i+1));
       otherParticles[j].update();
       otherParticles[j].render();
       if (otherParticles[j].particleIsFinished()) {
         otherParticles.splice(j, 1);
       }
-      pop();
     }
-//  }
+    pop();
+  }
 
   for (var i = 0; i < clickEffect.length; i++) {
     var circle = clickEffect[i];
