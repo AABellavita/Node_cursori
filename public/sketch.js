@@ -44,12 +44,12 @@ function setup() {
 function draw() {
   background("#030c24");
 
-  if (mouseIsPressed){
-    mouseParticleBool = true;
-  }
-  else{
-    mouseParticleBool = false;
-  }
+  // if (mouseIsPressed){
+  //   mouseParticleBool = true;
+  // }
+  // else{
+  //   mouseParticleBool = false;
+  // }
 
   let mousePosition = {
     x: mouseX,
@@ -175,8 +175,8 @@ function particlesPos(data) {
   data.x = map(data.x, 0, data.width, 0, width, true);
   data.y = map(data.y, 0, data.height, 0, height, true);
 
-  data.x = data.x - width / 2;
-  data.y = data.y - height / 2;
+  data.x = data.x - width / 2 + random(-15, 15);
+  data.y = data.y - height / 2 + random(-15, 15);
 
   var getPos = otherParticles.find(otherParticle => otherParticle.id === data.id);
 
