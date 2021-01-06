@@ -58,7 +58,6 @@ function draw() {
     height: height,
     //mouseParticleBool: mouseParticleBool
   };
-
   socket.emit("mouse", mousePosition);
 
   translate(width / 2, height / 2);
@@ -175,9 +174,8 @@ function particlesPos(data) {
   data.x = map(data.x, 0, data.width, 0, width, true);
   data.y = map(data.y, 0, data.height, 0, height, true);
 
-  data.x = data.x - width / 2 + random(-15, 15);
-  data.y = data.y - height / 2 + random(-15, 15);
-
+  data.x = data.x - width / 2;
+  data.y = data.y - height / 2;
   var getPos = otherParticles.find(otherParticle => otherParticle.id === data.id);
 
   if (getPos == undefined) {
@@ -291,8 +289,8 @@ class myParticle {
 
 
 function otherParticle(temp_x, temp_y, temp_id) {
-  this.x = temp_x;
-  this.y = temp_y;
+  this.x = random(-15, 15) + temp_x;
+  this.y = random(-15, 15) + temp_y;
   this.id = temp_id;
   this.speed = 3;
   this.gravity = 0.1;
