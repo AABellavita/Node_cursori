@@ -154,10 +154,12 @@ function mousePos(data) {
   data.y = data.y - height / 2;
 
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
-  console.log(mouseParticleBool);
+
+  console.log(data.ParticleBool);
+
   if (getPos == undefined) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
-    if (mouseParticleBool == true) {
+    if (data.mouseParticleBool == true) {
       for (var i = 0; i < random(0, 80); i++) {
         otherParticles.push(new otherParticle(data.x, data.y, data.id));
       }
