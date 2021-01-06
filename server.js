@@ -48,16 +48,23 @@ function newConnection(socket) {
     socket.broadcast.emit("deleteCursor", socketData);
   });
 
-  // socket.on("particles", function(data) {
-  //   var particlesData = {
-  //     x: data.x,
-  //     y: data.y,
-  //     width: data.width,
-  //     height: data.height,
-  //     id: socket.id
-  //   }
-  //   socket.broadcast.emit("particlesBroadcast", particlesData);
-  // });
+  socket.on("particles", function(data) {
+    var particlesData = {
+      x: data.x,
+      y: data.y,
+      width: data.width,
+      height: data.height,
+      id: socket.id
+    }
+    socket.broadcast.emit("particlesBroadcast", particlesData);
+  });
+
+  socket.on("disconnect2", function() {
+    var socketData = {
+      id: socket.id,
+    }
+    socket.broadcast.emit("deleteParticle", socketData);
+  });
 }
 
 console.log("node server is running");
