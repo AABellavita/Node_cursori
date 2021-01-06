@@ -96,7 +96,7 @@ function draw() {
   for(var i = 0; i < playersParticles.length; i++){
     push();
     rotate(360 / (playersParticles.length+1)*(i+1));
-    for (var j = 0; j < myParticles.length; j++) {
+    for (var j = 0; j < otherParticles.length; j++) {
       otherParticles[j].update();
       otherParticles[j].render();
       if (otherParticles[j].particleIsFinished()) {
