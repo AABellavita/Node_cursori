@@ -103,7 +103,7 @@ function draw() {
     }
   }
 
-  for(var i = 0; i < playersParticles.length; i++){
+  for(var i = 0; i < otherParticles.length; i++){
     for (var j = 0; j < otherParticles.length; j++) {
       push();
       rotate(360 / (otherCursors.length+1)*(i+1));
