@@ -2,7 +2,7 @@
 
 let socket = io();
 
-var mouseParticleBool = false;
+//var mouseParticleBool = false;
 
 //var myCursor;
 var myParticles = [];
@@ -104,18 +104,18 @@ function draw() {
   }
 
 
-  for(var i = 0; i < playersParticles.length; i++){
+  //for(var i = 0; i < playersParticles.length; i++){
     for (var j = 0; j < otherParticles.length; j++) {
       push();
       rotate(360 / (otherCursors.length+1)*(i+1));
       otherParticles[j].update();
       otherParticles[j].render();
-      pop();
       if (otherParticles[j].particleIsFinished()) {
         otherParticles.splice(j, 1);
       }
+      pop();
     }
-  }
+//  }
 
   for (var i = 0; i < clickEffect.length; i++) {
     var circle = clickEffect[i];
@@ -183,7 +183,7 @@ function particlesPos(data) {
     for (var i = 0; i < random(0, 80); i++) {
       otherParticles.push(new otherParticle(data.x, data.y, data.id));
     }
-    playersParticles.push(otherParticles);
+    //playersParticles.push(otherParticles);
   } else {
     getPos.x = data.x;
     getPos.y = data.y;
@@ -222,36 +222,6 @@ class myCursor {
 }
 
 
-function otherCursor(temp_x, temp_y, temp_id) {
-  this.x = temp_x;
-  this.y = temp_y;
-  this.id = temp_id;
-  this.color = palette[round(random(palette.length-1))];
-  this.size = 50;
-  this.history = [];
-
-  this.update = function() {
-    var prevPos = {
-      x: this.x,
-      y: this.y
-    }
-    this.history.push(prevPos);
-
-    if (this.history.length > 40) {
-      this.history.splice(0, 1);
-    }
-  }
-
-  this.display = function() {
-    noStroke();
-    fill(this.color.r, this.color.g, this.color.b, 50);
-    for (var i = 0; i < this.history.length; i++) {
-      ellipse(this.history[i].x, this.history[i].y, i / 1.5);
-    }
-  }
-}
-
-
 class myParticle {
   constructor() {
     this.x = random(-15, 15) + mouseX - width / 2;
@@ -284,6 +254,36 @@ class myParticle {
     if (this.diameter > 0) {
       fill(this.colour);
       ellipse(this.x, this.y, this.diameter, this.diameter);
+    }
+  }
+}
+
+
+function otherCursor(temp_x, temp_y, temp_id) {
+  this.x = temp_x;
+  this.y = temp_y;
+  this.id = temp_id;
+  this.color = palette[round(random(palette.length-1))];
+  this.size = 50;
+  this.history = [];
+
+  this.update = function() {
+    var prevPos = {
+      x: this.x,
+      y: this.y
+    }
+    this.history.push(prevPos);
+
+    if (this.history.length > 40) {
+      this.history.splice(0, 1);
+    }
+  }
+
+  this.display = function() {
+    noStroke();
+    fill(this.color.r, this.color.g, this.color.b, 50);
+    for (var i = 0; i < this.history.length; i++) {
+      ellipse(this.history[i].x, this.history[i].y, i / 1.5);
     }
   }
 }
