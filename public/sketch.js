@@ -155,7 +155,6 @@ function mousePos(data) {
 
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
-  console.log(data.mouseParticleBool);
 
   if (getPos == undefined) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
@@ -165,7 +164,9 @@ function mousePos(data) {
         data.y = data.x + random(-15, 15);
         otherParticles.push(new otherParticle(data.x, data.y, data.id));
       }
+      console.log(otherParticles);
       playersParticles.push(otherParticles);
+      console.log(playersParticles);
     }
   } else {
     getPos.x = data.x;
