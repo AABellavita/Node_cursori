@@ -161,6 +161,8 @@ function mousePos(data) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
     if (data.mouseParticleBool == true) {
       for (var i = 0; i < random(0, 80); i++) {
+        data.x = data.x + random(-15, 15);
+        data.y = data.x + random(-15, 15);
         otherParticles.push(new otherParticle(data.x, data.y, data.id));
       }
       playersParticles.push(otherParticles);
@@ -291,8 +293,8 @@ class myParticle {
 
 
 function otherParticle(temp_x, temp_y, temp_id) {
-  this.x = random(-15, 15) + temp_x;
-  this.y = random(-15, 15) + temp_y;
+  this.x = temp_x;
+  this.y = temp_y;
   this.id = temp_id;
   this.speed = 3;
   this.gravity = 0.1;
