@@ -155,7 +155,7 @@ function mousePos(data) {
 
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
-  console.log(data.ParticleBool);
+  console.log(data.mouseParticleBool);
 
   if (getPos == undefined) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
