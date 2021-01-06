@@ -135,12 +135,12 @@ function newPlayerConnected() {
 
 socket.on('deleteCursor', function(data) {
   var getPos = otherCursors.findIndex(cursor => cursor.id === data.id);
-  otherCursors.splice(getPos, 1)
+  otherCursors.splice(getPos, 1);
 });
 
 socket.on('deleteParticle', function(data) {
   var getPos = otherParticles.findIndex(otherParticle => otherParticle.id === data.id);
-  otherParticles.splice(getPos, 1)
+  otherParticles.splice(getPos, 1);
 });
 
 
@@ -154,7 +154,7 @@ function mousePos(data) {
   data.y = data.y - height / 2;
 
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
-
+  console.log(mouseParticleBool);
   if (getPos == undefined) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
     if (mouseParticleBool == true) {
