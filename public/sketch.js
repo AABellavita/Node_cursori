@@ -35,7 +35,7 @@ function setup() {
   pointer.addImage(loadImage('assets/images/pointer.png'));
 
   socket.on("mouseBroadcast", mousePos);
-  //socket.on("particlesBroadcast", particlesPos);
+  socket.on("particlesBroadcast", particlesPos);
 }
 
 
@@ -56,7 +56,7 @@ function draw() {
     y: mouseY,
     width: width,
     height: height,
-    mouseParticleBool: mouseParticleBool
+    //mouseParticleBool: mouseParticleBool
   };
 
   socket.emit("mouse", mousePosition);
@@ -83,13 +83,13 @@ function draw() {
   }
 
   if (mouseIsPressed) {
-    // let mouseParticles = {
-    //   x: mouseX,
-    //   y: mouseY,
-    //   width: width,
-    //   height: height
-    // };
-    // socket.emit("particles", mouseParticles);
+    let mouseParticles = {
+      x: mouseX,
+      y: mouseY,
+      width: width,
+      height: height
+    };
+    socket.emit("particles", mouseParticles);
 
     for (var i = 0; i < random(0, 80); i++) {
       myParticles.push(new myParticle());
@@ -104,9 +104,9 @@ function draw() {
     }
   }
 
-  for(var i = 0; i < playersParticles.length; i++){
+  for(var i = 0; i < otherCursors.length; i++){
     push();
-    rotate(360 / (playersParticles.length+1)*(i+1));
+    rotate(360 / (otherCursors.length+1)*(i+1));
     for (var j = 0; j < otherParticles.length; j++) {
       otherParticles[j].update();
       otherParticles[j].render();
@@ -155,45 +155,41 @@ function mousePos(data) {
 
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
-
   if (getPos == undefined) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
-    if (data.mouseParticleBool == true) {
-      for (var i = 0; i < random(0, 80); i++) {
-        data.x = data.x + random(-15, 15);
-        data.y = data.x + random(-15, 15);
-        otherParticles.push(new otherParticle(data.x, data.y, data.id));
-      }
-      console.log(otherParticle);
-      console.log(otherParticles);
-      playersParticles.push(otherParticles);
-      //console.log(playersParticles);
-    }
+    // if (data.mouseParticleBool == true) {
+    //   for (var i = 0; i < random(0, 80); i++) {
+    //     data.x = data.x + random(-15, 15);
+    //     data.y = data.x + random(-15, 15);
+    //     otherParticles.push(new otherParticle(data.x, data.y, data.id));
+    //   }
+    //   playersParticles.push(otherParticles);
+    // }
   } else {
     getPos.x = data.x;
     getPos.y = data.y;
   }
 }
 
-// function particlesPos(data) {
-//   data.x = map(data.x, 0, data.width, 0, width, true);
-//   data.y = map(data.y, 0, data.height, 0, height, true);
-//
-//   data.x = data.x - width / 2;
-//   data.y = data.y - height / 2;
-//
-//   var getPos = otherParticles.find(otherParticle => otherParticle.id === data.id);
-//
-//   if (getPos == undefined) {
-//     for (var i = 0; i < random(0, 80); i++) {
-//       otherParticles.push(new otherParticle(data.x, data.y, data.id));
-//     }
-//     playersParticles.push(otherParticles);
-//   } else {
-//     getPos.x = data.x;
-//     getPos.y = data.y;
-//   }
-// }
+function particlesPos(data) {
+  data.x = map(data.x, 0, data.width, 0, width, true);
+  data.y = map(data.y, 0, data.height, 0, height, true);
+
+  data.x = data.x - width / 2;
+  data.y = data.y - height / 2;
+
+  var getPos = otherParticles.find(otherParticle => otherParticle.id === data.id);
+
+  if (getPos == undefined) {
+    for (var i = 0; i < random(0, 80); i++) {
+      otherParticles.push(new otherParticle(data.x, data.y, data.id));
+    }
+    //playersParticles.push(otherParticles);
+  } else {
+    getPos.x = data.x;
+    getPos.y = data.y;
+  }
+}
 
 
 // __ Class and functions __
