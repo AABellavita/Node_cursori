@@ -104,7 +104,7 @@ function draw() {
   }
 
   for(var i = 0; i < playersParticles.length; i++){
-    for (var j = 0; j < playersParticles.length; j++) {
+    for (var j = 0; j < otherParticles.length; j++) {
       push();
       //rotate(360 / (otherCursors.length+1)*(i+1));
       otherParticles[j].update();
