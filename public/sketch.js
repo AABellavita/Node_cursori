@@ -164,8 +164,8 @@ function mousePos(data) {
         data.y = data.x + random(-15, 15);
         otherParticles.push(new otherParticle(data.x, data.y, data.id));
       }
+      console.log(otherParticle);
       console.log(otherParticles);
-      //console.log(otherParticles);
       playersParticles.push(otherParticles);
       //console.log(playersParticles);
     }
