@@ -104,16 +104,16 @@ function draw() {
   }
 
   for(var i = 0; i < playersParticles.length; i++){
-    push();
-    rotate(360 / (otherCursors.length+1)*(i+1));
     for (var j = 0; j < otherParticles.length; j++) {
+      push();
+      rotate(360 / (otherCursors.length+1)*(i+1));
       otherParticles[j].update();
       otherParticles[j].render();
+      pop();
       if (otherParticles[j].particleIsFinished()) {
         otherParticles.splice(j, 1);
       }
     }
-    pop();
   }
 
   for (var i = 0; i < clickEffect.length; i++) {
