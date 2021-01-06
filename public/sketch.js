@@ -66,9 +66,11 @@ function draw() {
   myCursor.update();
   myCursor.display();
 
+  var myAngle = (360 / (otherCursors.length+1));
+
   for(var i = 0; i < otherCursors.length; i++){
     push();
-    rotate(360 / (otherCursors.length+1)*(i+1));
+    rotate(myAngle * (i+1));
     otherCursors[i].display();
     otherCursors[i].update();
     pop();
@@ -101,9 +103,9 @@ function draw() {
   }
 
 
-  for(var i = 0; i < otherCursors.length; i++){
+  // for(var i = 0; i < otherCursors.length; i++){
     push();
-    rotate(360 / (otherCursors.length+1)*(i+1));
+    rotate(myAngle * otherCursors.length-1);
     for (var j = 0; j < otherParticles.length; j++) {
       otherParticles[j].update();
       otherParticles[j].render();
@@ -112,7 +114,7 @@ function draw() {
       }
     }
     pop();
-  }
+  // }
 
   for (var i = 0; i < clickEffect.length; i++) {
     var circle = clickEffect[i];
@@ -152,7 +154,8 @@ function mousePos(data) {
 
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
-  console.log(data.mouseParticleBool)
+  //console.log(data.mouseParticleBool)
+
   if (getPos == undefined) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
   } else {
