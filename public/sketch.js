@@ -127,8 +127,7 @@ function mousePos(data) {
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
   if (getPos == undefined) {
-    var tempCursor = new otherCursor(data.x, data.y, data.id);
-    otherCursors.push(tempCursor);
+    otherCursors.push(new otherCursor(data.x, data.y, data.id));
   } else {
     getPos.x = data.x;
     getPos.y = data.y;
@@ -146,8 +145,7 @@ function mousePos(data) {
 //
 //   if (getPos == undefined) {
 //     for (var i = 0; i < random(0, 80); i++) {
-//       var tempParticle = new otherParticle(data.x, data.y, data.id);
-//       otherParticles.push(tempParticle);
+//       otherParticles.push(new otherParticle(data.x, data.y, data.id));
 //     }
 //   } else {
 //     getPos.x = data.x;
