@@ -37,7 +37,7 @@ function newConnection(socket) {
       width: data.width,
       height: data.height,
       id: socket.id,
-      mouseParticleBool: mouseParticleBool
+      mouseParticleBool: data.mouseParticleBool
     }
     socket.broadcast.emit("mouseBroadcast", mouseData);
   });

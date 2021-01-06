@@ -2,7 +2,7 @@
 
 let socket = io();
 
-let mouseParticleBool = false;
+var mouseParticleBool = false;
 
 //var myCursor;
 var myParticles = [];
