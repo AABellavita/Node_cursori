@@ -2,7 +2,7 @@
 
 let socket = io();
 
-//var mouseParticleBool = false;
+var mouseParticleBool = false;
 
 //var myCursor;
 var myParticles = [];
@@ -35,7 +35,7 @@ function setup() {
   pointer.addImage(loadImage('assets/images/pointer.png'));
 
   socket.on("mouseBroadcast", mousePos);
-  socket.on("particlesBroadcast", particlesPos);
+  //socket.on("particlesBroadcast", particlesPos);
 }
 
 
@@ -44,19 +44,12 @@ function setup() {
 function draw() {
   background("#030c24");
 
-  // if (mouseIsPressed){
-  //   mouseParticleBool = true;
-  // }
-  // else{
-  //   mouseParticleBool = false;
-  // }
-
   let mousePosition = {
     x: mouseX,
     y: mouseY,
     width: width,
     height: height,
-    //mouseParticleBool: mouseParticleBool
+    mouseParticleBool: mouseParticleBool
   };
   socket.emit("mouse", mousePosition);
 
@@ -82,17 +75,21 @@ function draw() {
   }
 
   if (mouseIsPressed) {
-    let mouseParticles = {
-      x: mouseX,
-      y: mouseY,
-      width: width,
-      height: height
-    };
-    socket.emit("particles", mouseParticles);
+    // let mouseParticles = {
+    //   x: mouseX,
+    //   y: mouseY,
+    //   width: width,
+    //   height: height
+    // };
+    // socket.emit("particles", mouseParticles);
+
+    mouseParticleBool = true;
 
     for (var i = 0; i < random(0, 80); i++) {
       myParticles.push(new myParticle());
     }
+  } else {
+    mouseParticleBool = false;
   }
 
   for (var i = 0; i < myParticles.length; i++) {
@@ -138,10 +135,10 @@ socket.on('deleteCursor', function(data) {
   otherCursors.splice(getPos, 1);
 });
 
-socket.on('deleteParticle', function(data) {
-  var getPos = otherParticles.findIndex(otherParticle => otherParticle.id === data.id);
-  otherParticles.splice(getPos, 1);
-});
+// socket.on('deleteParticle', function(data) {
+//   var getPos = otherParticles.findIndex(otherParticle => otherParticle.id === data.id);
+//   otherParticles.splice(getPos, 1);
+// });
 
 
 // __ Socket functions __
@@ -155,40 +152,38 @@ function mousePos(data) {
 
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
+  console.log(data.mouseParticleBool)
   if (getPos == undefined) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
-    // if (data.mouseParticleBool == true) {
-    //   for (var i = 0; i < random(0, 80); i++) {
-    //     data.x = data.x + random(-15, 15);
-    //     data.y = data.x + random(-15, 15);
-    //     otherParticles.push(new otherParticle(data.x, data.y, data.id));
-    //   }
-    //   playersParticles.push(otherParticles);
-    // }
   } else {
     getPos.x = data.x;
     getPos.y = data.y;
-  }
-}
-
-function particlesPos(data) {
-  data.x = map(data.x, 0, data.width, 0, width, true);
-  data.y = map(data.y, 0, data.height, 0, height, true);
-
-  data.x = data.x - width / 2;
-  data.y = data.y - height / 2;
-  var getPos = otherParticles.find(otherParticle => otherParticle.id === data.id);
-
-  if (getPos == undefined) {
-    for (var i = 0; i < random(0, 80); i++) {
-      otherParticles.push(new otherParticle(data.x, data.y, data.id));
+    if (data.mouseParticleBool == true) {
+      for (var i = 0; i < random(0, 80); i++) {
+        otherParticles.push(new otherParticle(data.x, data.y, data.id));
+      }
     }
-    //playersParticles.push(otherParticles);
-  } else {
-    getPos.x = data.x;
-    getPos.y = data.y;
   }
 }
+
+// function particlesPos(data) {
+//   data.x = map(data.x, 0, data.width, 0, width, true);
+//   data.y = map(data.y, 0, data.height, 0, height, true);
+//
+//   data.x = data.x - width / 2;
+//   data.y = data.y - height / 2;
+//   var getPos = otherParticles.find(otherParticle => otherParticle.id === data.id);
+//
+//   if (getPos == undefined) {
+//     for (var i = 0; i < random(0, 800); i++) {
+//       otherParticles.push(new otherParticle(data.x, data.y, data.id));
+//     }
+//     //playersParticles.push(otherParticles);
+//   } else {
+//     getPos.x = data.x;
+//     getPos.y = data.y;
+//   }
+// }
 
 
 // __ Class and functions __
