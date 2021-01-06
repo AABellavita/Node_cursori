@@ -180,7 +180,7 @@ function particlesPos(data) {
   var getPos = otherParticles.find(otherParticle => otherParticle.id === data.id);
 
   if (getPos == undefined) {
-    for (var i = 0; i < random(0, 160); i++) {
+    for (var i = 0; i < random(0, 80); i++) {
       otherParticles.push(new otherParticle(data.x, data.y, data.id));
     }
     //playersParticles.push(otherParticles);
