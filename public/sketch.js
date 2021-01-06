@@ -90,7 +90,7 @@ function draw() {
     };
     socket.emit("particles", mouseParticles);
 
-    for (var i = 0; i < random(0, 80); i++) {
+    for (var i = 0; i < random(0, 160); i++) {
       myParticles.push(new myParticle());
     }
   }
