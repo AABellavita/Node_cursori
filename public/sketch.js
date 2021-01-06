@@ -166,7 +166,7 @@ function mousePos(data) {
       }
       console.log(otherParticles);
       playersParticles.push(otherParticles);
-      console.log(playersParticles);
+      //console.log(playersParticles);
     }
   } else {
     getPos.x = data.x;
