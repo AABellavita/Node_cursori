@@ -2,6 +2,8 @@
 
 let socket = io();
 
+let mouseParticleBool = false;
+
 //var myCursor;
 var myParticles = [];
 
@@ -42,12 +44,21 @@ function setup() {
 function draw() {
   background("#030c24");
 
+  // if (mouseIsPressed){
+  //   mouseParticleBool = true;
+  // }
+  // else{
+  //   mouseParticleBool = false;
+  // }
+
   let mousePosition = {
     x: mouseX,
     y: mouseY,
     width: width,
-    height: height
+    height: height,
+    //mouseParticleBool: mouseParticleBool
   };
+
   socket.emit("mouse", mousePosition);
 
   translate(width / 2, height / 2);
@@ -93,7 +104,7 @@ function draw() {
     }
   }
 
-  for(var i = 0; i < playersParticles.length; i++){
+  for(var i = 0; i < otherCursors.length; i++){
     push();
     rotate(360 / (otherCursors.length+1)*(i+1));
     for (var j = 0; j < otherParticles.length; j++) {
