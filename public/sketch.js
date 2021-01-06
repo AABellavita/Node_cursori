@@ -165,6 +165,7 @@ function mousePos(data) {
         otherParticles.push(new otherParticle(data.x, data.y, data.id));
       }
       console.log(otherParticles);
+      //console.log(otherParticles);
       playersParticles.push(otherParticles);
       //console.log(playersParticles);
     }
