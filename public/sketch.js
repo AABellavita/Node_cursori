@@ -8,9 +8,6 @@ var mouseParticleBool = false;
 var myParticles = [];
 
 var otherCursors = [];
-var otherParticles = [];
-
-var playersParticles = [];
 
 var clickEffect = [];
 var palette = [
@@ -35,7 +32,6 @@ function setup() {
   pointer.addImage(loadImage('assets/images/pointer.png'));
 
   socket.on("mouseBroadcast", mousePos);
-  //socket.on("particlesBroadcast", particlesPos);
 }
 
 
@@ -49,49 +45,35 @@ function draw() {
     y: mouseY,
     width: width,
     height: height,
-    mouseParticleBool: mouseParticleBool
   };
   socket.emit("mouse", mousePosition);
 
   translate(width / 2, height / 2);
 
   angleMode(DEGREES);
-  noCursor();
+  var rotAngle = (360 / (otherCursors.length+1));
 
   drawSprites();
 
   pointer.position.x = mouseX - width / 2;
   pointer.position.y = mouseY - height / 2;
 
+  noCursor();
   myCursor.update();
   myCursor.display();
 
-  var myAngle = (360 / (otherCursors.length+1));
-
   for(var i = 0; i < otherCursors.length; i++){
     push();
-    rotate(myAngle * (i+1));
+    rotate(rotAngle * (i+1));
     otherCursors[i].display();
     otherCursors[i].update();
     pop();
   }
 
   if (mouseIsPressed) {
-    // let mouseParticles = {
-    //   x: mouseX,
-    //   y: mouseY,
-    //   width: width,
-    //   height: height
-    // };
-    // socket.emit("particles", mouseParticles);
-
-    mouseParticleBool = true;
-
     for (var i = 0; i < random(0, 80); i++) {
       myParticles.push(new myParticle());
     }
-  } else {
-    mouseParticleBool = false;
   }
 
   for (var i = 0; i < myParticles.length; i++) {
@@ -101,20 +83,6 @@ function draw() {
       myParticles.splice(i, 1);
     }
   }
-
-
-  // for(var i = 0; i < otherCursors.length; i++){
-    push();
-    rotate(myAngle * otherCursors.length-1);
-    for (var j = 0; j < otherParticles.length; j++) {
-      otherParticles[j].update();
-      otherParticles[j].render();
-      if (otherParticles[j].particleIsFinished()) {
-        otherParticles.splice(j, 1);
-      }
-    }
-    pop();
-  // }
 
   for (var i = 0; i < clickEffect.length; i++) {
     var circle = clickEffect[i];
@@ -137,11 +105,6 @@ socket.on('deleteCursor', function(data) {
   otherCursors.splice(getPos, 1);
 });
 
-// socket.on('deleteParticle', function(data) {
-//   var getPos = otherParticles.findIndex(otherParticle => otherParticle.id === data.id);
-//   otherParticles.splice(getPos, 1);
-// });
-
 
 // __ Socket functions __
 
@@ -154,39 +117,14 @@ function mousePos(data) {
 
   var getPos = otherCursors.find(otherCursor => otherCursor.id === data.id);
 
-  //console.log(data.mouseParticleBool)
-
   if (getPos == undefined) {
     otherCursors.push(new otherCursor(data.x, data.y, data.id));
   } else {
     getPos.x = data.x;
     getPos.y = data.y;
-    if (data.mouseParticleBool == true) {
-      for (var i = 0; i < random(0, 80); i++) {
-        otherParticles.push(new otherParticle(data.x, data.y, data.id));
-      }
-    }
   }
-}
 
-// function particlesPos(data) {
-//   data.x = map(data.x, 0, data.width, 0, width, true);
-//   data.y = map(data.y, 0, data.height, 0, height, true);
-//
-//   data.x = data.x - width / 2;
-//   data.y = data.y - height / 2;
-//   var getPos = otherParticles.find(otherParticle => otherParticle.id === data.id);
-//
-//   if (getPos == undefined) {
-//     for (var i = 0; i < random(0, 800); i++) {
-//       otherParticles.push(new otherParticle(data.x, data.y, data.id));
-//     }
-//     //playersParticles.push(otherParticles);
-//   } else {
-//     getPos.x = data.x;
-//     getPos.y = data.y;
-//   }
-// }
+}
 
 
 // __ Class and functions __
@@ -228,6 +166,7 @@ class myParticle {
     this.gravity = 0.1;
     this.diameter = (dist(this.x, this.y, mouseX - width / 2, mouseY - height / 2)) * 0.7;
     this.colour = color(255, 255, 255, random(1, 150));
+    //this.color = palette[round(random(palette.length-1))];
     this.ax = random(-this.speed, this.speed);
     this.ay = random(-this.speed, this.speed);
   }
@@ -251,6 +190,7 @@ class myParticle {
     noStroke();
     if (this.diameter > 0) {
       fill(this.colour);
+      //fill(this.color.r, this.color.g, this.color.b);
       ellipse(this.x, this.y, this.diameter, this.diameter);
     }
   }
@@ -285,43 +225,6 @@ function otherCursor(temp_x, temp_y, temp_id) {
     }
   }
 }
-
-
-function otherParticle(temp_x, temp_y, temp_id) {
-  this.x = random(-15, 15) + temp_x;
-  this.y = random(-15, 15) + temp_y;
-  this.id = temp_id;
-  this.speed = 3;
-  this.gravity = 0.1;
-  this.diameter = (dist(this.x, this.y, temp_x, temp_y)) * 0.7;
-  this.colour = color(255, 255, 255, random(1, 150));
-  this.ax = random(-this.speed, this.speed);
-  this.ay = random(-this.speed, this.speed);
-
-  this.update = function() {
-    this.diameter = this.diameter - 0.3;
-    this.x += this.ax;
-    this.y += this.ay;
-
-    this.x += random(-this.speed / 2, this.speed / 2);
-    this.y += random(-this.speed / 2, this.speed / 2);
-  }
-
-  this.particleIsFinished = function() {
-    if (this.diameter < 0) {
-      return true;
-    }
-  }
-
-  this.render = function() {
-    noStroke();
-    if (this.diameter > 0) {
-      fill(this.colour);
-      ellipse(this.x, this.y, this.diameter, this.diameter);
-    }
-  }
-}
-
 
 function circles() {
   this.x = mouseX - width / 2;
