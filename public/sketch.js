@@ -22,7 +22,7 @@ var palette = [
 // __ Preload __
 
 function preload(){
-  prova = loadImage('assets/1.png');
+  prova = loadImage('assets/images/1.png');
 }
 
 // __ Setup __
@@ -35,11 +35,8 @@ function setup() {
   pointer = createSprite(0, 0);
   pointer.addImage(loadImage('assets/images/pointer.png'));
 
-  pointer = createSprite(0, 0);
-  pointer.addImage(loadImage('assets/pointer.png'));
-
   slider0 = createSprite(-50, -120);
-  slider0.addImage(loadImage('assets/slider.png'));
+  slider0.addImage(loadImage('assets/images/slider.png'));
   slider0.visible = true;
 
   click0 = createSprite(0, 0);
