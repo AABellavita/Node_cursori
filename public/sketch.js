@@ -2,8 +2,6 @@
 
 let socket = io();
 
-var mouseParticleBool = false;
-
 //var myCursor;
 var myParticles = [];
 
@@ -21,6 +19,12 @@ var palette = [
 ];
 
 
+// __ Preload __
+
+function preload(){
+  prova = loadImage('assets/1.png');
+}
+
 // __ Setup __
 
 function setup() {
@@ -30,6 +34,17 @@ function setup() {
 
   pointer = createSprite(0, 0);
   pointer.addImage(loadImage('assets/images/pointer.png'));
+
+  pointer = createSprite(0, 0);
+  pointer.addImage(loadImage('assets/pointer.png'));
+
+  slider0 = createSprite(-50, -120);
+  slider0.addImage(loadImage('assets/slider.png'));
+  slider0.visible = true;
+
+  click0 = createSprite(0, 0);
+  click0.addImage(prova);
+  click0.visible = true;
 
   socket.on("mouseBroadcast", mousePos);
 }
