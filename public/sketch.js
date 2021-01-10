@@ -39,7 +39,7 @@ function setup() {
   slider0.addImage(loadImage('assets/images/slider.png'));
   slider0.visible = true;
 
-  click0 = createSprite(width / 30 * 7 - width / 2, height / 30 * 7 - height / 2);
+  click0 = createSprite(width / 30 * 5 - width / 2, height / 20 * 5 - height / 2);
   click0.addImage(prova);
   click0.visible = true;
 
